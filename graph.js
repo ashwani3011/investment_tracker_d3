@@ -63,7 +63,7 @@ function handleMouseOut() {
 
 function handleMouseClick() {
   let id = d3.select(this)._groups[0][0].__data__.data.id;
-  db.collection("investments").doc(id).delete();
+  db.collection("investment").doc(id).delete();
 }
 
 let showDetails = (item) => {
@@ -171,7 +171,7 @@ let arcTweenEnter = (d) => {
 
 let values = [];
 
-db.collection("investments").onSnapshot((res) => {
+db.collection("investment").onSnapshot((res) => {
   res.docChanges().forEach((change) => {
     let doc = { ...change.doc.data(), id: change.doc.id };
 
@@ -187,5 +187,7 @@ db.collection("investments").onSnapshot((res) => {
       values = values.filter((item) => item.id !== doc.id);
     }
   });
+
   render(values);
+  console.log("render done");
 });
