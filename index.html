@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>D3</title>
+  </head>
+  <body>
+    <div class="container">
+      <svg>
+        <rect></rect>
+      </svg>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+    <script defer>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        //     apiKey: "AIzaSyDF1wXk7qQ6CAxul1dx4Wddk46N2ffBTVE",
+        //     authDomain: "d3-course-f274f.firebaseapp.com",
+        //     projectId: "d3-course-f274f",
+        //     storageBucket: "d3-course-f274f.appspot.com",
+        //     messagingSenderId: "776884042597",
+        //     appId: "1:776884042597:web:aa5a234d4a398900e8ff8c",
+      };
+
+      // Initialize Firebase
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+    </script>
+
+    <script src="https://d3js.org/d3.v7.min.js" defer></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
