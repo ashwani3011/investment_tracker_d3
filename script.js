@@ -16,18 +16,13 @@ form.addEventListener("submit", (e) => {
   } else {
     let item = { name: nameInput.value, cost: parseInt(costInput.value) };
 
+    // console.log(item);
     db.collection("investment")
       .add(item)
       .then((res) => {
-        console.log("Added data");
+        nameInput.value = "";
+        costInput.value = "";
       });
-    // console.log(item);
-    // db.collection("investments")
-    //   .add(item)
-    //   .then((res) => {
-    //     nameInput.value = "";
-    //     costInput.value = "";
-    //   });
   }
 });
 
