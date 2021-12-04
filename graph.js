@@ -35,6 +35,54 @@ const arc = d3
 
 const colorScale = d3.scaleOrdinal(d3["schemeSet3"]);
 
+let addMouseEvents = () => {
+  graph
+    .selectAll("path")
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut)
+    .on("click", handleMouseClick);
+};
+
+function handleMouseOver() {
+  d3.select(this).style("opacity", 0.5);
+
+  console.log();
+  let name = d3.select(this)._groups[0][0].__data__.data.name;
+  let cost = d3.select(this)._groups[0][0].__data__.data.cost;
+
+  showDetails([{ name, cost }]);
+  // .attr("transform", "translate(0,0)scale(1.05)");
+}
+
+function handleMouseOut() {
+  d3.select(this).style("opacity", 1);
+
+  showDetails([]);
+  // .attr("transform", "translate(0,0)scale(1)");
+}
+
+function handleMouseClick() {
+  let id = d3.select(this)._groups[0][0].__data__.data.id;
+  db.collection("investments").doc(id).delete();
+}
+
+let showDetails = (item) => {
+  let details = svg.selectAll(".detail").data(item);
+
+  details.exit().remove();
+
+  details.text((d) => `${d.name} : ₹${d.cost}`).attr("font-weight", 600);
+
+  details
+    .enter()
+    .append("text")
+    .text((d) => `${d.name} : ₹${d.cost}`)
+    .attr("font-weight", 600)
+    .attr("class", "detail")
+    .attr("fill", "white")
+    .attr("y", dims.height + 100);
+};
+
 // Visualisation
 let render = (values) => {
   // 1. Scales update
@@ -107,6 +155,8 @@ let render = (values) => {
     .delay((d, i) => i * 200)
     .duration(800)
     .attr("r", 5);
+
+  addMouseEvents();
 };
 
 let arcTweenEnter = (d) => {
@@ -121,7 +171,7 @@ let arcTweenEnter = (d) => {
 
 let values = [];
 
-db.collection("investment").onSnapshot((res) => {
+db.collection("investments").onSnapshot((res) => {
   res.docChanges().forEach((change) => {
     let doc = { ...change.doc.data(), id: change.doc.id };
 
@@ -137,7 +187,5 @@ db.collection("investment").onSnapshot((res) => {
       values = values.filter((item) => item.id !== doc.id);
     }
   });
-
   render(values);
-  console.log("render done");
 });
