@@ -2,26 +2,108 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>D3</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Investment Tracker</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
   </head>
-  <body>
-    <div class="container">
-      <svg>
-        <rect></rect>
-      </svg>
-    </div>
 
+  <style>
+    * {
+      margin: 0;
+      font-family: arial;
+    }
+
+    body {
+      overflow-y: hidden;
+    }
+
+    header {
+      height: 5rem;
+      text-align: center;
+      background-color: #34626c;
+      color: white;
+    }
+
+    header h1 {
+      padding-top: 1rem;
+    }
+
+    main {
+      display: flex;
+      height: 100vh;
+      background-color: #839b97;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    main div {
+      margin-bottom: 20rem;
+    }
+
+    .input-container {
+      background-color: #cfd3ce;
+      padding: 2rem;
+      border-radius: 10%;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    .graph-container {
+      background-color: #cfd3ce;
+      margin-top: 5%;
+    }
+  </style>
+
+  <body>
+    <header>
+      <h1>Investment Tracker</h1>
+    </header>
+
+    <main>
+      <div class="input-container">
+        <form>
+          <div class="form-group">
+            <label for="formGroupExampleInput">Item name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Enter item name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Cost ₹</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cost"
+              placeholder="Enter Cost ₹"
+            />
+          </div>
+          <button type="submit" class="btn">Add item</button>
+        </form>
+      </div>
+      <div class="graph-container">Graph will be here</div>
+    </main>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
     <script defer>
       // Your web app's Firebase configuration
       const firebaseConfig = {
-        //     apiKey: "AIzaSyDF1wXk7qQ6CAxul1dx4Wddk46N2ffBTVE",
-        //     authDomain: "d3-course-f274f.firebaseapp.com",
-        //     projectId: "d3-course-f274f",
-        //     storageBucket: "d3-course-f274f.appspot.com",
-        //     messagingSenderId: "776884042597",
-        //     appId: "1:776884042597:web:aa5a234d4a398900e8ff8c",
+        apiKey: "AIzaSyDF1wXk7qQ6CAxul1dx4Wddk46N2ffBTVE",
+        authDomain: "d3-course-f274f.firebaseapp.com",
+        projectId: "d3-course-f274f",
+        storageBucket: "d3-course-f274f.appspot.com",
+        messagingSenderId: "776884042597",
+        appId: "1:776884042597:web:3f6b2be97329958ce8ff8c",
       };
 
       // Initialize Firebase
@@ -29,8 +111,8 @@
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
     </script>
-
     <script src="https://d3js.org/d3.v7.min.js" defer></script>
     <script src="script.js" defer></script>
+    <script src="graph.js" defer></script>
   </body>
 </html>
